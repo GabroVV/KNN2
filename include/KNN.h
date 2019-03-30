@@ -10,16 +10,22 @@
 #include <memory>
 class KNN{
 private:
-    std::shared_ptr<IrisCollection> trainData;
-    std::shared_ptr<IrisCollection> testData;
+    IrisCollection* trainData;
+public:
+    IrisCollection getTestData();
+
+private:
+    IrisCollection* testData;
     std::vector<int> result;
     std::vector<double> distance;
 public:
-    KNN(std::shared_ptr<IrisCollection> trainData,std::shared_ptr<IrisCollection> testData);
+    KNN(IrisCollection* trainData,IrisCollection* testData);
     virtual ~KNN();
-    void calculateDistances(Iris iris,int size,bool sl,bool sw, bool pl,bool pw);
+    void calculateDistances(std::shared_ptr<Iris> iris,int size,bool sl,bool sw, bool pl,bool pw);
+    static bool sortByDistance(const std::shared_ptr<Iris>& i1,const std::shared_ptr<Iris>& i2);
+    void sortTrainData();
     double getDistances(int i);
-    const IrisCollection &getTrainData() const;
+    IrisCollection* getTrainData();
 
 
 

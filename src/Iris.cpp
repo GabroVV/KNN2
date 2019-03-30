@@ -4,6 +4,7 @@
 using namespace std;
 #include "../include/Iris.h"
 #include <sstream>
+#include <memory>
 
 double Iris::getSl() const {
     return sl;
@@ -37,7 +38,7 @@ Iris::Iris(double sl, double sw, double pl, double pw, int species):sl(sl),sw(sw
 string Iris::toString()
 {
     stringstream text;
-    text<<sl<<","<<sw<<","<<pl<<","<<"pw"<<","<<species;
+    text<<sl<<","<<sw<<","<<pl<<","<<pw<<","<<species<<","<<distance<<endl;
     return text.str();
 }
 
@@ -48,3 +49,8 @@ double Iris::getDistance() const {
 void Iris::setDistance(double distance) {
     Iris::distance = distance;
 }
+
+
+//bool operator<(const shared_ptr<Iris> &s1, const shared_ptr<Iris> &s2){
+//    return s1->getDistance() < s2->getDistance();
+//}

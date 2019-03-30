@@ -5,7 +5,8 @@ using namespace std;
 
 #include <iostream>
 #include "fstream"
-#include "../include/IrisCollection.h"
+#include "IrisCollection.h"
+#include <algorithm>
 
 IrisCollection::IrisCollection(){
 }
@@ -20,6 +21,11 @@ shared_ptr<Iris> IrisCollection::getIris(int position){
 
 void IrisCollection::addIris(shared_ptr<Iris> iris) {
     collection.push_back(iris);
+}
+
+void IrisCollection::swapIris(shared_ptr<Iris> iris,int position)
+{
+    collection[position]=iris;
 }
 
 void IrisCollection::loadCSV(std::string filename) {
@@ -38,5 +44,16 @@ void IrisCollection::loadCSV(std::string filename) {
 
 }
 
+vector<shared_ptr<Iris>> IrisCollection::getCollection()
+{
+    return collection;
+}
+
+
+void IrisCollection::sortTrainData()
+{
+    sort(collection.begin(),collection.end(),sortByDistance);
+
+};
 
 
