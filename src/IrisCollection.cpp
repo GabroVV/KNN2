@@ -23,10 +23,6 @@ void IrisCollection::addIris(shared_ptr<Iris> iris) {
     collection.push_back(iris);
 }
 
-void IrisCollection::swapIris(shared_ptr<Iris> iris,int position)
-{
-    collection[position]=iris;
-}
 
 void IrisCollection::loadCSV(std::string filename) {
     ifstream file(filename);
@@ -41,19 +37,28 @@ void IrisCollection::loadCSV(std::string filename) {
         shared_ptr<Iris> temp(new Iris(stod(sl),stod(sw),stod(pl),stod(pw),stoi(species)));
         addIris(temp);
     }
-
 }
-
-vector<shared_ptr<Iris>> IrisCollection::getCollection()
-{
-    return collection;
-}
-
 
 void IrisCollection::sortTrainData()
 {
     sort(collection.begin(),collection.end(),sortByDistance);
 
 };
+
+vector<shared_ptr<Iris>> IrisCollection::getKFirst (int k)
+{
+    vector<shared_ptr<Iris>> KClose;
+    KClose.reserve(k);
+    for(int i=0;i<k;i++)
+    {
+        KClose.push_back(collection[i]);
+    }
+    return KClose;
+}
+
+unsigned long long int IrisCollection::getSize()
+{
+    return collection.size();
+}
 
 

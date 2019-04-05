@@ -16,7 +16,7 @@ BOOST_AUTO_TEST_SUITE(IrisTest)
         BOOST_CHECK_EQUAL(i1.getSpecies(),2);
     }
 
-    BOOST_AUTO_TEST_CASE(SetterTest_Iris_ParametersSet)
+    BOOST_AUTO_TEST_CASE(SetterTest_Iris_DistanceSet)
     {
         Iris i1(2.0,2.5,2.6,2.7,2);
         i1.setDistance(30.0);

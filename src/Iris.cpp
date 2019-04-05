@@ -6,6 +6,7 @@ using namespace std;
 #include <sstream>
 #include <memory>
 
+#define SpeciesAmount 3
 double Iris::getSl() const {
     return sl;
 }
@@ -35,12 +36,6 @@ Iris::Iris(double sl, double sw, double pl, double pw, int species):sl(sl),sw(sw
     distance = 0;
 }
 
-string Iris::toString()
-{
-    stringstream text;
-    text<<sl<<","<<sw<<","<<pl<<","<<pw<<","<<species<<","<<distance<<endl;
-    return text.str();
-}
 
 double Iris::getDistance() const {
     return distance;

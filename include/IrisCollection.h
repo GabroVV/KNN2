@@ -15,14 +15,13 @@ private:
 public:
     IrisCollection();
     ~IrisCollection();
+    unsigned long long int getSize();
     std::shared_ptr<Iris> getIris(int position);
     void addIris(std::shared_ptr<Iris> iris);
     void swapIris(std::shared_ptr<Iris> iris,int position);
     void loadCSV(std::string filename);
-    std::vector<std::shared_ptr<Iris>> getCollection();
-
-
     void sortTrainData();
+    std::vector<std::shared_ptr<Iris>> getKFirst(int k);
 
 };
 

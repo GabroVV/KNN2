@@ -9,18 +9,17 @@
 class Iris
 {
 private:
-    double sl;
-    double sw;
-    double pl;
-    double pw;
+    double sl;   // Sepal Lenght
+    double sw;   // Sepal Width
+    double pl;   // Petal Lenght
+    double pw;   // Petal Width
     int species;
-    double distance;
+    double distance;    // Euclidean distance from test Iris
 public:
     double getDistance() const;
 
     void setDistance(double distance);
 
-public:
     double getSl() const;
 
     double getSw() const;
@@ -34,7 +33,6 @@ public:
 public:
     Iris(double sl,double sw,double pl,double pw,int species);
     ~Iris();
-    std::string toString();
 };
 
 #endif //UNTITLED4IAD_ZAD1_IRIS_H

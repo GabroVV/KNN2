@@ -15,18 +15,8 @@ BOOST_AUTO_TEST_SUITE(IrisCollectionTest)
         BOOST_CHECK_EQUAL(i1->getSl(),collection.getIris(0)->getSl());
     }
 
-    BOOST_AUTO_TEST_CASE(IrisSwapTest_IrisCollection_ParametersSet)
-    {
-        IrisCollection collection;
-        shared_ptr<Iris> i1(new Iris(2.0,2.5,2.6,2.7,2));
-        shared_ptr<Iris> i2(new Iris(3,3,3,3,3));
 
-        collection.addIris(i1);
-        collection.swapIris(i2,0);
-        BOOST_CHECK_EQUAL(i2->getSl(),collection.getIris(0)->getSl());
-    }
-
-    BOOST_AUTO_TEST_CASE(IrisSortTest_IrisCollection_ParametersSet)
+    BOOST_AUTO_TEST_CASE(IrisSortTest_IrisCollection_VectorSortedByDistance)
     {
         IrisCollection collection;
         shared_ptr<Iris> i2(new Iris(2.0,2.5,2.6,2.7,2));
