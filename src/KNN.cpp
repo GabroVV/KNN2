@@ -50,7 +50,7 @@ IrisCollection* KNN::getTestData()
     return testData;
 }
 
-int KNN::Classify(int k,int testIrisPosition)
+int KNN::classify(int k,int testIrisPosition)
 {
     int species[SpeciesAmount] = {};
     int pointer;
@@ -106,23 +106,65 @@ void KNN::clearResult()
     result.clear();
 }
 
-void KNN::DisplayConfusionMatrix()
+void KNN::fillConfusionMatrix()
 {
-    double T[SpeciesAmount][SpeciesAmount] ={};
-    for(int i=0;i<testData->getSize();i++)
-    {
-        int testSpecies = testData->getIris(i)->getSpecies();
-        T[testSpecies][result[i]]++;
-
-    }
     for(int i=0;i<SpeciesAmount;i++)
     {
         for(int j=0;j<SpeciesAmount;j++)
         {
-            T[i][j] = T[i][j]*SpeciesAmount*100/(double)testData->getSize();
-            cout<<setw(8);
-            cout<<T[i][j];
+            confusionMatrix[i][j] = 0;
+        }
+    }
+    for(int i=0;i<testData->getSize();i++)
+    {
+        int testSpecies = testData->getIris(i)->getSpecies();
+        confusionMatrix[testSpecies][result[i]]++;
+
+    }
+}
+
+void KNN::displayConfusionMatrix()
+{
+    cout<<endl<<setw(18)<<""<<"Setosa"<<setw(12)<<"Versicolor"<<setw(12)<<"Virginica"<<endl;
+    for(int i=0;i<SpeciesAmount;i++)
+    {
+        if(i == 0) cout<<setw(12)<<"Setosa";
+        else if(i == 1)cout<<setw(12)<<"Versicolor";
+        else cout<<setw(12)<<"Virginica";
+
+        for(int j=0;j<SpeciesAmount;j++)
+        {
+            confusionMatrix[i][j] = confusionMatrix[i][j]*SpeciesAmount*100/(double)testData->getSize();
+            cout<<setw(12);
+            cout<<confusionMatrix[i][j];
         }
         cout<<endl<<endl;
+    }
+}
+
+int KNN::getResult(int position)
+{
+    return result[position];
+}
+
+void KNN::executeAlgorithm(bool sl,bool sw, bool pl,bool pw) {
+
+    cout<<"--------------Dla cech--------------"<<endl
+    <<boolalpha<<"Dlugosc dzialki kielicha: "<<sl<<endl
+    <<"Szerokosc dzialki kielicha: "<<sw<<endl
+    <<"Dlugosc platka: "<<pl<<endl
+    <<"Szerokosc platka: "<<pw<<endl
+    <<"------------------------------------";
+    for (int k = 1; k <= 11; k += 2) {
+        cout << endl << "k =" << k << endl;
+        for (int i = 0; i < testData->getSize(); i++) {
+            calculateDistances(testData->getIris(i), trainData->getSize(), sl, sw, pl, pw);
+            getTrainData()->sortTrainData();
+            classify(k, i);
+        }
+        fillConfusionMatrix();
+        displayConfusionMatrix();
+        cout << " Dokladnosc:" << getAccuracy() << endl;
+        clearResult();
     }
 }

@@ -4,8 +4,6 @@
 #include "../include/KNN.h"
 using namespace std;
 
-
-
 using namespace std;
 int main() {
 
@@ -17,17 +15,11 @@ int main() {
 
     KNN knn(&trainData,&testData);
 
-    for (int k = 1; k <= 11; k += 2) {
-        cout << endl << "k =" << k << endl;
-        for (int i = 0; i < testData.getSize(); i++) {
-            knn.calculateDistances(testData.getIris(i), trainData.getSize(), 1, 1, 0, 0);
-            knn.getTrainData()->sortTrainData();
-            knn.Classify(k, i);
-        }
-        knn.DisplayConfusionMatrix();
-        cout << " Dokladnosc:" << knn.getAccuracy() << endl;
-        knn.clearResult();
-    }
+    knn.executeAlgorithm(1,1,1,1);
+    knn.executeAlgorithm(1,1,1,0);
+    knn.executeAlgorithm(0,1,1,1);
+    knn.executeAlgorithm(1,1,0,0);
+    knn.executeAlgorithm(0,1,0,1);
 
 
 

@@ -42,6 +42,8 @@ BOOST_AUTO_TEST_SUITE(KNNTest)
         IrisCollection trainData;
         IrisCollection testData;
 
+        shared_ptr<Iris> test(new Iris(2.1,2.1,2.1,2.1,2));
+
         shared_ptr<Iris> i1(new Iris(1,1,1,1,0));
         shared_ptr<Iris> i2(new Iris(2,2,2,2,1));
         shared_ptr<Iris> i3(new Iris(3,3,3,3,2));
@@ -50,7 +52,14 @@ BOOST_AUTO_TEST_SUITE(KNNTest)
         trainData.addIris(i2);
         trainData.addIris(i3);
 
+        testData.addIris(test);
 
+        KNN knn(&trainData,&testData);
+        knn.calculateDistances(testData.getIris(0), trainData.getSize(), 1, 1, 1, 1);
+        knn.getTrainData()->sortTrainData();
+        knn.classify(3,0);
+
+        BOOST_CHECK_EQUAL(knn.getResult(0),1);
     }
 
 BOOST_AUTO_TEST_SUITE_END()
