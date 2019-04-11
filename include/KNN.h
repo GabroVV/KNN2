@@ -9,6 +9,7 @@
 #include "IrisCollection.h"
 #include "Iris.h"
 #include <memory>
+
 class KNN{
 private:
     IrisCollection* trainData;
@@ -18,10 +19,10 @@ private:
 public:
     KNN(IrisCollection* trainData,IrisCollection* testData);
     virtual ~KNN();
-    void calculateDistances(std::shared_ptr<Iris> iris,int size,bool sl,bool sw, bool pl,bool pw);
+    void calculateDistances(std::shared_ptr<Iris> iris,bool sl,bool sw, bool pl,bool pw);
     IrisCollection* getTrainData();
     IrisCollection* getTestData();
-    int classify(int k,int testIrisPosition);
+    int classify(int k);
     double getAccuracy();
     void clearResult();
     void fillConfusionMatrix();

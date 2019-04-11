@@ -16,7 +16,7 @@ KNN::~KNN() {
 
 }
 
-void KNN::calculateDistances(shared_ptr<Iris> iris,int size,bool sl,bool sw, bool pl,bool pw) {
+void KNN::calculateDistances(shared_ptr<Iris> iris,bool sl,bool sw, bool pl,bool pw) {
     for(int i=0;i<trainData->getSize();i++)
     {
         double sum = 0;
@@ -50,37 +50,37 @@ IrisCollection* KNN::getTestData()
     return testData;
 }
 
-int KNN::classify(int k,int testIrisPosition)
+int KNN::classify(int k)
 {
     int species[SpeciesAmount] = {};
     int pointer;
-    bool remis = true;
-    while(remis)
+    bool notDecided = true;
+    while(notDecided)
     {
         for(int i=0;i<k;i++)
         {
             pointer = trainData->getIris(i)->getSpecies();
             switch(pointer)
             {
-                case 0: {species[0]++;break;}
-                case 1: {species[1]++;break;}
-                case 2: {species[2]++;break;}
+                case setosa: {species[setosa]++;break;}
+                case versicolor: {species[versicolor]++;break;}
+                case virginica: {species[virginica]++;break;}
             }
         }
-       if(((species[0] == species[1]) && (species[0] >= species[2])) ||
-          ((species[0] == species[2]) && (species[0] >= species[1])) ||
-          ((species[1] == species[2])&&(species[1] >= species[0])))
+
+       if(((species[setosa] == species[versicolor]) && (species[setosa] >= species[virginica])) ||
+          ((species[setosa] == species[virginica]) && (species[setosa] >= species[versicolor])) ||
+          ((species[versicolor] == species[virginica])&&(species[versicolor] >= species[setosa])))
        {
             k = 1;
             for(int i=0;i<SpeciesAmount;i++)
             {
                 species[i] = 0;
-
             }
        }
        else
        {
-            remis = false;
+           notDecided = false;
        }
     }
 
@@ -128,8 +128,8 @@ void KNN::displayConfusionMatrix()
     cout<<endl<<setw(18)<<""<<"Setosa"<<setw(12)<<"Versicolor"<<setw(12)<<"Virginica"<<endl;
     for(int i=0;i<SpeciesAmount;i++)
     {
-        if(i == 0) cout<<setw(12)<<"Setosa";
-        else if(i == 1)cout<<setw(12)<<"Versicolor";
+        if(i == setosa) cout<<setw(12)<<"Setosa";
+        else if(i == versicolor)cout<<setw(12)<<"Versicolor";
         else cout<<setw(12)<<"Virginica";
 
         for(int j=0;j<SpeciesAmount;j++)
@@ -158,9 +158,9 @@ void KNN::executeAlgorithm(bool sl,bool sw, bool pl,bool pw) {
     for (int k = 1; k <= 11; k += 2) {
         cout << endl << "k =" << k << endl;
         for (int i = 0; i < testData->getSize(); i++) {
-            calculateDistances(testData->getIris(i), trainData->getSize(), sl, sw, pl, pw);
+            calculateDistances(testData->getIris(i), sl, sw, pl, pw);
             getTrainData()->sortTrainData();
-            classify(k, i);
+            classify(k);
         }
         fillConfusionMatrix();
         displayConfusionMatrix();

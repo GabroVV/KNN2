@@ -18,11 +18,8 @@ public:
     unsigned long long int getSize();
     std::shared_ptr<Iris> getIris(int position);
     void addIris(std::shared_ptr<Iris> iris);
-    void swapIris(std::shared_ptr<Iris> iris,int position);
     void loadCSV(std::string filename);
     void sortTrainData();
-    std::vector<std::shared_ptr<Iris>> getKFirst(int k);
-
 };
 
 static bool sortByDistance(const std::shared_ptr<Iris>& i1,const std::shared_ptr<Iris>& i2)

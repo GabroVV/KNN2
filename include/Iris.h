@@ -6,6 +6,13 @@
 #define UNTITLED4IAD_ZAD1_IRIS_H
 
 #include "string"
+
+enum iris
+{
+    setosa,
+    versicolor,
+    virginica
+};
 class Iris
 {
 private:

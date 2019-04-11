@@ -36,7 +36,6 @@ Iris::Iris(double sl, double sw, double pl, double pw, int species):sl(sl),sw(sw
     distance = 0;
 }
 
-
 double Iris::getDistance() const {
     return distance;
 }
@@ -45,7 +44,3 @@ void Iris::setDistance(double distance) {
     Iris::distance = distance;
 }
 
-
-//bool operator<(const shared_ptr<Iris> &s1, const shared_ptr<Iris> &s2){
-//    return s1->getDistance() < s2->getDistance();
-//}

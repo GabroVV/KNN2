@@ -45,17 +45,6 @@ void IrisCollection::sortTrainData()
 
 };
 
-vector<shared_ptr<Iris>> IrisCollection::getKFirst (int k)
-{
-    vector<shared_ptr<Iris>> KClose;
-    KClose.reserve(k);
-    for(int i=0;i<k;i++)
-    {
-        KClose.push_back(collection[i]);
-    }
-    return KClose;
-}
-
 unsigned long long int IrisCollection::getSize()
 {
     return collection.size();
